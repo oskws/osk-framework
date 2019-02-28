@@ -16,7 +16,6 @@ public class FooTest implements Serializable {
     @Column(name = "pk_id")
     private Integer pkId;
 
-
     @Column(name = "uk_mac")
     private String ukMac;
 

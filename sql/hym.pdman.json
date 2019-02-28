@@ -1056,11 +1056,366 @@
             }
           ],
           "chnname": "热门标签"
+        },
+        {
+          "title": "system_user",
+          "fields": [
+            {
+              "name": "pk_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "主键",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "uk_mac",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "唯一标识",
+              "notNull": true
+            },
+            {
+              "name": "created_by",
+              "type": "Name",
+              "remark": "",
+              "chnname": "创建人",
+              "notNull": false
+            },
+            {
+              "name": "created_time",
+              "type": "TIMESTAMP",
+              "remark": "",
+              "chnname": "创建时间",
+              "notNull": true,
+              "defaultValue": "CURRENT_TIMESTAMP"
+            },
+            {
+              "name": "updated_by",
+              "type": "Name",
+              "remark": "",
+              "chnname": "更新人",
+              "notNull": false
+            },
+            {
+              "name": "updated_time",
+              "type": "TIMESTAMP",
+              "remark": "",
+              "chnname": "更新时间",
+              "notNull": true,
+              "defaultValue": "CURRENT_TIMESTAMP"
+            },
+            {
+              "name": "full_name",
+              "type": "Name",
+              "remark": "",
+              "chnname": "用户名",
+              "notNull": true
+            },
+            {
+              "name": "login_name",
+              "type": "Name",
+              "remark": "",
+              "chnname": "登录账号",
+              "notNull": true
+            },
+            {
+              "name": "login_password",
+              "type": "PasswordString",
+              "remark": "",
+              "chnname": "登录密码",
+              "notNull": true
+            },
+            {
+              "name": "login_salt",
+              "type": "PasswordString",
+              "remark": "",
+              "chnname": "盐值",
+              "notNull": true
+            }
+          ],
+          "indexs": [
+            {
+              "name": "uk",
+              "isUnique": true,
+              "fields": [
+                "uk_mac"
+              ]
+            },
+            {
+              "name": "uk_login_name",
+              "isUnique": true,
+              "fields": [
+                "login_name"
+              ]
+            }
+          ],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "系统用户"
+        },
+        {
+          "title": "system_dict",
+          "fields": [
+            {
+              "name": "pk_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "主键",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "uk_mac",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "唯一标识"
+            },
+            {
+              "name": "created_by",
+              "type": "Name",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "created_time",
+              "type": "TIMESTAMP",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "updated_by",
+              "type": "Name",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "updated_time",
+              "type": "TIMESTAMP",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "table_field",
+              "type": "Name",
+              "remark": "",
+              "chnname": "数据表名.字段名"
+            },
+            {
+              "name": "code",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "编号"
+            },
+            {
+              "name": "name",
+              "type": "Name",
+              "remark": "",
+              "chnname": "名称"
+            },
+            {
+              "name": "remark",
+              "type": "Name",
+              "remark": "",
+              "chnname": "备注"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "系统字典"
         }
       ],
       "graphCanvas": {
         "nodes": [],
         "edges": []
+      },
+      "associations": []
+    },
+    {
+      "name": "db_spec",
+      "chnname": "数据库规范",
+      "entities": [
+        {
+          "title": "comment",
+          "fields": [
+            {
+              "name": "pk_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "主键",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "uk_mac",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "唯一标识",
+              "notNull": true
+            },
+            {
+              "name": "created_by",
+              "type": "Name",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "created_time",
+              "type": "TIMESTAMP",
+              "remark": "",
+              "chnname": "创建时间",
+              "notNull": true,
+              "defaultValue": "CURRENT_TIMESTAMP"
+            },
+            {
+              "name": "updated_by",
+              "type": "Name",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "updated_time",
+              "type": "TIMESTAMP",
+              "remark": "",
+              "chnname": "更新时间",
+              "notNull": true,
+              "defaultValue": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "规范",
+          "remark": "1.表名加模块前缀2.设置默认值3.添加唯一约束4.存储时间使用时间戳5.年月日使用date类型"
+        }
+      ],
+      "graphCanvas": {
+        "edges": [],
+        "nodes": []
       },
       "associations": []
     }
@@ -1593,7 +1948,8 @@
         "name": "uk_mac",
         "type": "IdOrKey",
         "remark": "",
-        "chnname": "唯一标识"
+        "chnname": "唯一标识",
+        "notNull": true
       },
       {
         "name": "created_by",
@@ -1605,7 +1961,9 @@
         "name": "created_time",
         "type": "TIMESTAMP",
         "remark": "",
-        "chnname": "创建时间"
+        "chnname": "创建时间",
+        "notNull": true,
+        "defaultValue": "CURRENT_TIMESTAMP"
       },
       {
         "name": "updated_by",
@@ -1617,7 +1975,9 @@
         "name": "updated_time",
         "type": "TIMESTAMP",
         "remark": "",
-        "chnname": "更新时间"
+        "chnname": "更新时间",
+        "notNull": true,
+        "defaultValue": "CURRENT_TIMESTAMP"
       }
     ],
     "defaultFieldsType": "2",
