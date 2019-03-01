@@ -7,6 +7,14 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.junit.Test;
 
+import java.sql.Date;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.temporal.TemporalAccessor;
+import java.time.temporal.TemporalAmount;
+
 public class JwtTest {
 
     @Test
@@ -20,7 +28,7 @@ public class JwtTest {
                 .sign(algorithm);
 
         JWTVerifier jv = JWT.require(algorithm)
-                .withIssuer("liwenliang")
+                .withIssuer("liwenlianx")
                 .build();
 
         DecodedJWT decode = JWT.decode(jwt);
@@ -29,5 +37,11 @@ public class JwtTest {
         System.out.println(JSON.toJSONString(verify.getClaims()));
 
         System.out.println(jwt);
+    }
+
+    @Test
+    public void testTime(){
+        java.util.Date from = Date.from(LocalDateTime.now().plusDays(30).toInstant(ZoneOffset.ofHours(8)));
+        System.out.println(from);
     }
 }
