@@ -11,4 +11,6 @@ import java.io.Serializable;
 @Repository
 public interface SystemUserRepository extends JpaRepository<SystemUser,Integer>,JpaSpecificationExecutor<SystemUser>,Serializable {
 
+    SystemUser findByLoginName(String loginName);
+
 }

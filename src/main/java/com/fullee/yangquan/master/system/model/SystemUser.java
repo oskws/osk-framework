@@ -1,5 +1,6 @@
 package com.fullee.yangquan.master.system.model;
 
+import com.alibaba.fastjson.JSON;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,8 +11,15 @@ import java.time.LocalDateTime;
 @Table(name = "system_user")
 public class SystemUser {
 
+    public static final String PREFIX = "USER";
+
+    public SystemUser(String loginName, String loginPassword) {
+        this.loginName = loginName;
+        this.loginPassword = loginPassword;
+    }
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_id",unique = true,nullable = false)
     private Integer pkId;
 
@@ -42,4 +50,7 @@ public class SystemUser {
     @Column(name = "login_salt",length = 32)
     private String loginSalt;
 
+    public String toJSON() {
+        return JSON.toJSONString(this);
+    }
 }

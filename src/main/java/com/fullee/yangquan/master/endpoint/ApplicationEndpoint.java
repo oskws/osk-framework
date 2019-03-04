@@ -1,17 +1,29 @@
 package com.fullee.yangquan.master.endpoint;
 
 import com.fullee.yangquan.master.framework.common.bean.JSONResult;
+import com.fullee.yangquan.master.framework.serve.JWTKit;
+import com.fullee.yangquan.master.system.model.SystemUser;
+import com.fullee.yangquan.master.system.service.ISystemUserService;
+import lombok.extern.slf4j.Slf4j;
+import org.osgl.util.Crypto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+
+@Slf4j
 @RestController
 @RequestMapping
 public class ApplicationEndpoint {
 
+    @Autowired
+    private ISystemUserService userService;
+
     @GetMapping({"/version","/index"})
-    public JSONResult version(){
+    public JSONResult version() {
         return JSONResult.success();
     }
 
@@ -20,22 +32,37 @@ public class ApplicationEndpoint {
      * @return
      */
     @PostMapping("/join")
-    public JSONResult join(){
+    public JSONResult join(SystemUser user){
+        try {
+            userService.userJoin(user);
+        }catch (Exception e){
+            log.error("用户注册失败：{}",user.toJSON());
+            return JSONResult.fail("用户注册失败");
+        }
 
-        return null;
+        return JSONResult.success();
     }
 
     /**
      * 用户登录
+     *
      * @return
      */
     @PostMapping("/login")
-    public JSONResult login(){
+    public JSONResult login(String loginName, String password, HttpServletResponse response) {
 
+        SystemUser systemUser = new SystemUser(loginName, password);
 
+        userService.userLogin(systemUser);
 
+        // TODO jwt 中加入过期时间和用户信息 授权信息
+        String jwt = JWTKit.createJWT();
 
-        return null;
+        response.setHeader("Authorization",jwt);
+
+        // TODO 将用户信息加入Cache
+
+        return JSONResult.success();
     }
 
     /**
@@ -44,6 +71,8 @@ public class ApplicationEndpoint {
      */
     @PostMapping("/logout")
     public JSONResult logout(){
+        // TODO 主动清空 Cache
+
         return null;
     }
 
