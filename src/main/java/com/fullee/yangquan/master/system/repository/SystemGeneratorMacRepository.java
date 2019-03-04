@@ -12,4 +12,5 @@ import java.io.Serializable;
 public interface SystemGeneratorMacRepository extends JpaRepository<SystemGeneratorMac, Integer>, JpaSpecificationExecutor<SystemGeneratorMac>, Serializable {
 
     SystemGeneratorMac findByPrefix(String prefix);
+
 }

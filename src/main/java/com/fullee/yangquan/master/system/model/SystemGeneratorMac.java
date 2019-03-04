@@ -16,12 +16,15 @@ public class SystemGeneratorMac implements Serializable {
     @Column(name = "pk_id")
     private Integer pkId;
 
-    @Column(name = "create_time")
+    @Column(name = "created_time")
     private LocalDateTime createdTime;
 
     @Column(name = "prefix")
     private String prefix;
 
+    /**
+     * {yyyy}
+     */
     @Column(name = "formatter")
     private String formatter;
 

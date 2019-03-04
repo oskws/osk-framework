@@ -58,16 +58,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
                 return true;
             }
-        }).addPathPatterns(authorizationURL());
+        }).addPathPatterns(urls);
     }
-
-    private List<String> authorizationURL() {
-        List<String> list = C.newList();
-        list.add("/**");
-
-        return list;
-    }
-
 
 }
 

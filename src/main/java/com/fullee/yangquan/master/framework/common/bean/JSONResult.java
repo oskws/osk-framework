@@ -42,6 +42,10 @@ public class JSONResult {
         return new JSONResult(0,"fail","失败");
     }
 
+    public static JSONResult fail(String view){
+        return new JSONResult(0,"fail",view);
+    }
+
     public static JSONResult fail(Integer code,String msg){
         return new JSONResult(code,msg);
     }
