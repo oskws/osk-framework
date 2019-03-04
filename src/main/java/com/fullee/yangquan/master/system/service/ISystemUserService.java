@@ -8,4 +8,11 @@ public interface ISystemUserService {
 
     SystemUser userJoin(SystemUser user);
 
+    /**
+     * 检查用户有效性
+     * @param loginName
+     * @return
+     */
+    boolean checkedUser(String loginName);
+
 }

@@ -7,6 +7,7 @@ import com.fullee.yangquan.master.system.service.ISystemUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.osgl.util.C;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,12 +63,13 @@ public class ApplicationEndpoint {
         if (Objects.nonNull(user)){
             // TODO jwt 中加入过期时间和用户信息 授权信息
             Map<String,String> maps = new HashMap<>();
-
+            maps.put(JWTKit.KEY.AUTHORIZATION.getValue(), user.getLoginName());
             String jwt = JWTKit.createJWT(maps);
 
             response.setHeader("Authorization",jwt);
             // TODO 将用户信息加入Cache
-            return JSONResult.success(systemUser);
+
+            return JSONResult.success(user);
         }else {
             return JSONResult.fail();
         }
@@ -79,10 +81,11 @@ public class ApplicationEndpoint {
      * @return
      */
     @PostMapping("/logout")
-    public JSONResult logout(){
+    @CacheEvict(cacheNames = "LOGIN_CACHE",key = "#loginName",condition = "#result.code == 1")
+    public JSONResult logout(String loginName){
         // TODO 主动清空 Cache
-
-        return null;
+        System.out.println("清空缓存");
+        return JSONResult.success();
     }
 
 }

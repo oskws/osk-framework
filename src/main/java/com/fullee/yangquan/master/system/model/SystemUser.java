@@ -1,17 +1,21 @@
 package com.fullee.yangquan.master.system.model;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fullee.yangquan.master.framework.common.bean.BaseModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "system_user")
 @NoArgsConstructor
-public class SystemUser {
+public class SystemUser extends BaseModel implements Serializable {
 
     public static final String PREFIX = "USER";
 
@@ -46,13 +50,12 @@ public class SystemUser {
     @Column(name = "login_name")
     private String loginName;
 
+    @JsonIgnore
     @Column(name = "login_password",length = 32)
     private String loginPassword;
 
+    @JsonIgnore
     @Column(name = "login_salt",length = 32)
     private String loginSalt;
 
-    public String toJSON() {
-        return JSON.toJSONString(this);
-    }
 }

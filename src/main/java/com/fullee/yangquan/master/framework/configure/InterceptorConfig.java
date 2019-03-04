@@ -3,10 +3,12 @@ package com.fullee.yangquan.master.framework.configure;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fullee.yangquan.master.framework.serve.JWTKit;
+import com.fullee.yangquan.master.system.service.ISystemUserService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.osgl.util.C;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -30,7 +32,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     private String version;
 
-    private List<String> urls;
+    private List<String> excludeUrls;
+
+    @Autowired
+    private ISystemUserService userService;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -44,7 +49,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                     Claim claim = decodedJWT.getClaim(JWTKit.KEY.AUTHORIZATION.getValue());
                     String loginName = claim.asString();
 
-                    if (loginName.equals("liwen@163.com")) {
+                    if (userService.checkedUser(loginName)) {
                         System.out.println("认证成功");
                         return true;
                     }
@@ -58,7 +63,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
                 return true;
             }
-        }).addPathPatterns(urls);
+        }).addPathPatterns("/**").excludePathPatterns(excludeUrls);
     }
 
 }

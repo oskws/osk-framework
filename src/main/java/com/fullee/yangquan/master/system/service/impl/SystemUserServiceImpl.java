@@ -8,10 +8,11 @@ import com.fullee.yangquan.master.system.service.ISystemUserService;
 import org.osgl.util.Crypto;
 import org.osgl.util.S;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -24,7 +25,9 @@ public class SystemUserServiceImpl implements ISystemUserService {
     private ISystemGeneratorMacService generatorMacService;
 
     @Override
+    @Cacheable(cacheNames = "LOGIN_CACHE",key = "#user.loginName",condition = "#user != null ")
     public SystemUser userLogin(SystemUser user){
+        System.out.println("没走缓存");
         SystemUser systemUser = repository.findByLoginName(user.getLoginName());
 
         if (Objects.isNull(systemUser)) {
@@ -37,6 +40,18 @@ public class SystemUserServiceImpl implements ISystemUserService {
         }
 
         throw new AuthenticationException("登录认证失败");
+    }
+
+    /**
+     * 检查用户有效性
+     * @param loginName
+     * @return
+     */
+    @Override
+    @CachePut(cacheNames = "LOGIN_CACHE",key = "#user.loginName",condition = "#user != null ")
+    public boolean checkedUser(String loginName){
+        SystemUser user = repository.findByLoginName(loginName);
+        return Objects.nonNull(user);
     }
 
     @Override
