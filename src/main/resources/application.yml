@@ -10,3 +10,6 @@ spring:
 
 application:
   version: 1.0
+  urls:
+    - baidu.com
+    - qq.com

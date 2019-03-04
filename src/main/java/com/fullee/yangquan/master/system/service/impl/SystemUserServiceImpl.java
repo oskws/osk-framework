@@ -1,8 +1,8 @@
-package com.fullee.yangquan.master.system.user_module.service.impl;
+package com.fullee.yangquan.master.system.service.impl;
 
-import com.fullee.yangquan.master.system.user_module.model.SystemUser;
-import com.fullee.yangquan.master.system.user_module.repository.SystemUserRepository;
-import com.fullee.yangquan.master.system.user_module.service.ISystemUserService;
+import com.fullee.yangquan.master.system.model.SystemUser;
+import com.fullee.yangquan.master.system.repository.SystemUserRepository;
+import com.fullee.yangquan.master.system.service.ISystemUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

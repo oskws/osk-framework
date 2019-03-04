@@ -1306,6 +1306,111 @@
             }
           ],
           "chnname": "系统字典"
+        },
+        {
+          "title": "system_generator_mac",
+          "fields": [
+            {
+              "name": "pk_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "主键",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "created_time",
+              "type": "TIMESTAMP",
+              "remark": "",
+              "chnname": "创建时间",
+              "notNull": true,
+              "defaultValue": "CURRENT_TIMESTAMP"
+            },
+            {
+              "name": "prefix",
+              "type": "prefix",
+              "remark": "",
+              "chnname": "4位前缀"
+            },
+            {
+              "name": "formatter",
+              "type": "IdOrKey",
+              "remark": "{YYYY}{MM}{DD}{HH}{mm}{ss}{14}",
+              "chnname": "28位格式"
+            },
+            {
+              "name": "init_val",
+              "type": "IdOrKey",
+              "remark": "前缀4,时间14,max增长14",
+              "chnname": "初始值",
+              "defaultValue": ""
+            },
+            {
+              "name": "curr_val",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "当前值"
+            },
+            {
+              "name": "step",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "步进"
+            }
+          ],
+          "indexs": [
+            {
+              "name": "uk_prefix",
+              "isUnique": true,
+              "fields": [
+                "prefix"
+              ]
+            }
+          ],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "标识生成器"
         }
       ],
       "graphCanvas": {
@@ -1801,23 +1906,23 @@
         }
       },
       {
-        "name": "单字符",
-        "code": "Char",
+        "name": "CST_4prefix",
+        "code": "prefix",
         "apply": {
           "MYSQL": {
-            "type": "CHAR(1)"
+            "type": "CHAR(4)"
           },
           "ORACLE": {
-            "type": "CHAR(1)"
+            "type": "CHAR(4)"
           },
           "JAVA": {
             "type": "String"
           },
           "SQLServer": {
-            "type": "CHAR(1)"
+            "type": "CHAR(4)"
           },
           "PostgreSQL": {
-            "type": "CHAR(1)"
+            "type": "CHAR(4)"
           }
         }
       },

@@ -1,4 +1,4 @@
-package com.fullee.yangquan.master.system.user_module.model;
+package com.fullee.yangquan.master.system.model;
 
 import lombok.Data;
 

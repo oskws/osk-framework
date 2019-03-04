@@ -8,12 +8,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import org.junit.Test;
 
 import java.sql.Date;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.time.temporal.TemporalAccessor;
-import java.time.temporal.TemporalAmount;
 
 public class JwtTest {
 

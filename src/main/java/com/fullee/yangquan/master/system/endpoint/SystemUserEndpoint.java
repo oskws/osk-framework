@@ -1,8 +1,7 @@
 package com.fullee.yangquan.master.system.endpoint;
 
 import com.fullee.yangquan.master.framework.common.bean.JSONResult;
-import com.fullee.yangquan.master.system.user_module.model.SystemUser;
-import com.fullee.yangquan.master.system.user_module.service.ISystemUserService;
+import com.fullee.yangquan.master.system.service.ISystemUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
