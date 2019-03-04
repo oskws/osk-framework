@@ -1,7 +1,7 @@
-package com.fullee.yangquan.master.system.user_module.repository;
+package com.fullee.yangquan.master.system.repository;
 
 
-import com.fullee.yangquan.master.system.user_module.model.FooTest;
+import com.fullee.yangquan.master.system.model.FooTest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
