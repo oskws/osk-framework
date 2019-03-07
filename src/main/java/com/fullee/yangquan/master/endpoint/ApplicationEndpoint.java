@@ -5,8 +5,8 @@ import com.fullee.yangquan.master.system.model.SystemUser;
 import com.fullee.yangquan.master.framework.serve.JWTKit;
 import com.fullee.yangquan.master.system.service.ISystemUserService;
 import lombok.extern.slf4j.Slf4j;
-import org.osgl.util.C;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,6 +74,14 @@ public class ApplicationEndpoint {
             return JSONResult.fail();
         }
 
+    }
+
+    @Autowired
+    private Cache cache;
+
+    @GetMapping("/cache")
+    public JSONResult cache(String name) {
+        return JSONResult.success(cache.get(name,SystemUser.class).toJSON());
     }
 
     /**

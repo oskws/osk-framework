@@ -5,6 +5,7 @@ import com.fullee.yangquan.master.system.model.SystemUser;
 import com.fullee.yangquan.master.system.repository.SystemUserRepository;
 import com.fullee.yangquan.master.system.service.ISystemGeneratorMacService;
 import com.fullee.yangquan.master.system.service.ISystemUserService;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import org.osgl.util.Crypto;
 import org.osgl.util.S;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class SystemUserServiceImpl implements ISystemUserService {
     @Override
     @CachePut(cacheNames = "LOGIN_CACHE",key = "#user.loginName",condition = "#user != null ")
     public boolean checkedUser(String loginName){
+
         SystemUser user = repository.findByLoginName(loginName);
         return Objects.nonNull(user);
     }

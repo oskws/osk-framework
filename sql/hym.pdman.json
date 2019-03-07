@@ -47,6 +47,12 @@
               "chnname": "更新时间"
             },
             {
+              "name": "user_mac",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "系统用户MAC"
+            },
+            {
               "name": "full_name",
               "type": "Name",
               "remark": "",
@@ -63,24 +69,6 @@
               "type": "LongName",
               "remark": "",
               "chnname": "简介"
-            },
-            {
-              "name": "login_name",
-              "type": "Name",
-              "remark": "",
-              "chnname": "登录名"
-            },
-            {
-              "name": "user_password",
-              "type": "PasswordString",
-              "remark": "",
-              "chnname": "用户密码"
-            },
-            {
-              "name": "user_salt",
-              "type": "PasswordString",
-              "remark": "",
-              "chnname": "盐值"
             },
             {
               "name": "mobile_no",
@@ -207,7 +195,8 @@
               "name": "created_time",
               "type": "TIMESTAMP",
               "remark": "",
-              "chnname": "创建时间"
+              "chnname": "创建时间",
+              "defaultValue": "CURRENT_TIMESTAMP"
             },
             {
               "name": "updated_by",
@@ -219,7 +208,8 @@
               "name": "updated_time",
               "type": "TIMESTAMP",
               "remark": "",
-              "chnname": "更新时间"
+              "chnname": "更新时间",
+              "defaultValue": "CURRENT_TIMESTAMP"
             },
             {
               "name": "info_title",
@@ -1223,7 +1213,8 @@
               "name": "created_time",
               "type": "TIMESTAMP",
               "remark": "",
-              "chnname": "创建时间"
+              "chnname": "创建时间",
+              "defaultValue": "CURRENT_TIMESTAMP"
             },
             {
               "name": "updated_by",
@@ -1235,7 +1226,8 @@
               "name": "updated_time",
               "type": "TIMESTAMP",
               "remark": "",
-              "chnname": "更新时间"
+              "chnname": "更新时间",
+              "defaultValue": "CURRENT_TIMESTAMP"
             },
             {
               "name": "table_field",

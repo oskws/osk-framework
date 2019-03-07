@@ -1,7 +1,7 @@
 package com.fullee.yangquan.master.framework.configure;
 
-import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCache;
@@ -57,11 +57,14 @@ public class CaffeineConfig {
                     .maximumSize(c.getMaxSize()).build()));
         }
 
-
-
         manager.setCaches(caches);
 
         return manager;
+    }
+
+    @Bean
+    public Cache cache() {
+       return cacheManager().getCache(Caches.LOGIN_CACHE.name());
     }
 
 }

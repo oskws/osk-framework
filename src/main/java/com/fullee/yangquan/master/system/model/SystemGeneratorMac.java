@@ -1,5 +1,6 @@
 package com.fullee.yangquan.master.system.model;
 
+import com.fullee.yangquan.master.framework.common.bean.BaseModel;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "system_generator_mac")
-public class SystemGeneratorMac implements Serializable {
+public class SystemGeneratorMac extends BaseModel implements Serializable {
 
     @Id
     @GeneratedValue
