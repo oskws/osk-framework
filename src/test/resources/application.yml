@@ -1,0 +1,17 @@
+application:
+  version: 1.0
+  excludeUrls:
+    - /login
+server:
+  port: 8080
+
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/pd_hym?useUnicode=true&useSSL=true&autoReconnect=true
+    username: root
+    password: 123456
+  jpa:
+    show-sql: true
