@@ -1,4 +1,4 @@
-package com.oskworks.framework.system.entity;
+package com.oskworks.modules.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
@@ -27,6 +27,5 @@ public class User implements Serializable {
     private Integer userSlat;
 
     private Integer userPassword;
-
 
 }

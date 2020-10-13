@@ -1,6 +1,6 @@
-package com.oskworks.framework.system.mapper;
+package com.oskworks.modules.system.mapper;
 
-import com.oskworks.framework.system.entity.User;
+import com.oskworks.modules.system.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

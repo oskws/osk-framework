@@ -1,8 +1,8 @@
-package com.oskworks.framework.system.service.impl;
+package com.oskworks.modules.system.service.impl;
 
-import com.oskworks.framework.system.entity.User;
-import com.oskworks.framework.system.mapper.UserMapper;
-import com.oskworks.framework.system.service.IUserService;
+import com.oskworks.modules.system.entity.User;
+import com.oskworks.modules.system.mapper.UserMapper;
+import com.oskworks.modules.system.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

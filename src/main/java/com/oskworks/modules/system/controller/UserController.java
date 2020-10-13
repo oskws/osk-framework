@@ -1,4 +1,4 @@
-package com.oskworks.framework.system.controller;
+package com.oskworks.modules.system.controller;
 
 
 import com.oskworks.framework.common.bean.JSONResult;
