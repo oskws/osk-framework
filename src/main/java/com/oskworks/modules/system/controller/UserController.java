@@ -26,7 +26,7 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @PutMapping("/join")
+    @PutMapping("/signin")
     public JSONResult<?> join() {
         return null;
     }

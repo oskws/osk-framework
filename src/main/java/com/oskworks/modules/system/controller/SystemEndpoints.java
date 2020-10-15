@@ -2,6 +2,8 @@ package com.oskworks.modules.system.controller;
 
 
 import com.oskworks.framework.common.bean.JSONResult;
+import com.oskworks.framework.configure.ApplicationConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,14 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-08-27
  */
 @RestController
-@RequestMapping("/system")
+@RequestMapping
 public class SystemEndpoints {
 
-
+    @Autowired
+    private ApplicationConfiguration configuration;
 
     @GetMapping("/version")
     public JSONResult<String> version() {
-        return null;
+        return JSONResult.success(configuration.getVersion());
     }
 
 

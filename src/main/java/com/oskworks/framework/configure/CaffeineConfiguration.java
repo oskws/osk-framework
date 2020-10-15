@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 @EnableCaching
 @Configuration
-public class CaffeineConfig {
+public class CaffeineConfiguration {
 
     public static final int DEFAULT_MAXSIZE = 10000;
     public static final int DEFAULT_TTL = 600;

@@ -56,8 +56,8 @@ public class JSONResult<T> implements Serializable {
         return new JSONResult<>(code, msg);
     }
 
-    public static <T> JSONResult<T> success(T body) {
-        return new JSONResult<>(body);
+    public static <T> JSONResult<T> success(T payload) {
+        return new JSONResult<>(payload);
     }
 
     public static <T> JSONResult<T> fail(ErrorEnum errorEnum) {
