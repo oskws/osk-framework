@@ -2,6 +2,7 @@ application:
   version: 1.0
   excludeUrls:
     - /login
+    - /system/**
 server:
   port: 8080
 
@@ -10,8 +11,8 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/oskdb?useUnicode=true&useSSL=true&autoReconnect=true
-    username: root
-    password: 123456
+    url: jdbc:mysql://${dbip}:3306/oskdb?useUnicode=true&useSSL=true&autoReconnect=true
+    username: oskdb
+    password: ${dbpasswd}
   jpa:
     show-sql: true

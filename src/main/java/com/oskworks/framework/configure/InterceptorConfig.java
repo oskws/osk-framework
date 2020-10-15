@@ -23,8 +23,8 @@ import java.util.List;
 @Getter
 @Setter
 @Slf4j
-@Configuration
-@ConfigurationProperties(prefix = "application")
+//@Configuration
+//@ConfigurationProperties(prefix = "application")
 public class InterceptorConfig implements WebMvcConfigurer {
 
     private String version;
