@@ -14,5 +14,7 @@ spring:
     url: jdbc:mysql://${dbip}:3306/oskdb?useUnicode=true&useSSL=true&autoReconnect=true
     username: oskdb
     password: ${dbpasswd}
-  jpa:
-    show-sql: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false

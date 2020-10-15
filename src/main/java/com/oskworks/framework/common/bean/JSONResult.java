@@ -15,10 +15,10 @@ public class JSONResult<T> implements Serializable {
     // 用户友好提示
     private String view = "成功";
 
-
     private T payload;
 
-    private JSONResult(){}
+    private JSONResult() {
+    }
 
 
     public JSONResult(Integer code, String msg) {
@@ -36,28 +36,32 @@ public class JSONResult<T> implements Serializable {
         this.payload = payload;
     }
 
-    public static <T> JSONResult<T> success(){
+    public static <T> JSONResult<T> success() {
         return new JSONResult<T>();
     }
 
-    public static <T> JSONResult<T> fail(){
-        return new JSONResult<>(0,"fail","失败");
+    public static <T> JSONResult<T> fail() {
+        return new JSONResult<>(0, "fail", "失败");
     }
 
-    public static <T> JSONResult<T> fail(String view){
-        return new JSONResult<>(0,"fail",view);
+    public static <T> JSONResult<T> fail(String view) {
+        return new JSONResult<>(0, "fail", view);
     }
 
-    public static <T> JSONResult<T> fail(Integer code,String msg){
-        return new JSONResult<>(code,msg);
+    public static <T> JSONResult<T> fail(Integer code, String msg) {
+        return new JSONResult<>(code, msg);
     }
 
-    public static <T> JSONResult<T> success(Integer code,String msg){
-        return new JSONResult<>(code,msg);
+    public static <T> JSONResult<T> success(Integer code, String msg) {
+        return new JSONResult<>(code, msg);
     }
 
-    public static <T> JSONResult<T> success(T body){
+    public static <T> JSONResult<T> success(T body) {
         return new JSONResult<>(body);
+    }
+
+    public static <T> JSONResult<T> fail(ErrorEnum errorEnum) {
+        return new JSONResult<>(errorEnum.getCode(), errorEnum.getMsg(), errorEnum.getView());
     }
 
 }
