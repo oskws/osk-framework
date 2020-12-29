@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "application.exclude-urls",
+      "type": "java.lang.String",
+      "description": "Description for application.excludeUrls."
+    },
+    {
+      "name": "application.version",
+      "type": "java.lang.String",
+      "description": "Description for application.version."
+    }
+  ] }

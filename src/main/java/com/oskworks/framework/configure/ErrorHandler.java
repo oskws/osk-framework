@@ -1,5 +1,6 @@
 package com.oskworks.framework.configure;
 
+import cn.dev33.satoken.exception.NotLoginException;
 import com.oskworks.framework.common.bean.ErrorEnum;
 import com.oskworks.framework.common.bean.JSONResult;
 import com.oskworks.framework.exception.AuthenticationException;
@@ -18,11 +19,12 @@ public class ErrorHandler {
         log.error(ex.getMessage(), ex);
         // 404
         if (ex instanceof NoHandlerFoundException) {
-            return JSONResult.fail(ErrorEnum.NoHandlerFound);
+            return JSONResult.fail(ErrorEnum.NO_HANDLER_FOUND);
         }
 
-        if (ex instanceof AuthenticationException) {
-            return JSONResult.fail(ErrorEnum.FAIL);
+        // 401
+        if (ex instanceof NotLoginException) {
+            return JSONResult.fail(ErrorEnum.NOT_LOGIN);
         }
 
         return JSONResult.fail(ex.getMessage());

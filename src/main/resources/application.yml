@@ -1,6 +1,6 @@
 application:
   version: 1.0
-  excludeUrls:
+  exclude-urls:
     - /login
     - /system/**
 server:
@@ -18,3 +18,5 @@ spring:
     throw-exception-if-no-handler-found: true
   resources:
     add-mappings: false
+  sa-token:
+    token-name: Authentication

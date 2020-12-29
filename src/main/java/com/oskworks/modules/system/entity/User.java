@@ -1,12 +1,14 @@
 package com.oskworks.modules.system.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
+import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -18,7 +20,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("system_user")
+@TableName(value = "system_user",autoResultMap = true)
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,10 +35,20 @@ public class User implements Serializable {
 
     private String userPassword;
 
+    @TableField(typeHandler = FastjsonTypeHandler.class)
+    private Details details;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedTime;
 
+    @Data
+    private static class Details {
+        String sex;
+        Integer age;
+    }
+
 }
+
