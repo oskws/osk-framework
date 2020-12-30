@@ -25,7 +25,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-        registry.addInterceptor(new SaCheckInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new SaLoginCheckInterceptor()).addPathPatterns("/**").excludePathPatterns(configuration.getExcludeUrls());
 
 //        registry.addInterceptor(new HandlerInterceptor() {
 //            @Override

@@ -1,8 +1,9 @@
 application:
   version: 1.0
   exclude-urls:
+    - /version
     - /login
-    - /system/**
+    - /join
 server:
   port: 8080
 
@@ -12,7 +13,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${dbip}:3306/oskdb?useUnicode=true&useSSL=true&autoReconnect=true
-    username: oskdb
+    username: root
     password: ${dbpasswd}
   mvc:
     throw-exception-if-no-handler-found: true
@@ -20,3 +21,4 @@ spring:
     add-mappings: false
   sa-token:
     token-name: Authentication
+    is-read-cookie: false
