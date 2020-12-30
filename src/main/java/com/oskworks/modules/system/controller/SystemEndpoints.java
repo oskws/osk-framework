@@ -4,14 +4,12 @@ package com.oskworks.modules.system.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.oskworks.framework.common.bean.JSONResult;
 import com.oskworks.framework.configure.ApplicationConfiguration;
+import com.oskworks.modules.system.entity.LoginEntity;
 import com.oskworks.modules.system.entity.User;
 import com.oskworks.modules.system.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.osgl.util.S;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -51,19 +49,20 @@ public class SystemEndpoints {
      * @return
      */
     @PutMapping("/login")
-    public JSONResult<?> login(String loginName,String passwd) {
+    public JSONResult<?> login(@RequestBody LoginEntity loginEntity) {
 
         User user = userService.lambdaQuery()
-                .eq(User::getLoginName, loginName)
+                .eq(User::getLoginName, loginEntity.getLoginName())
                 .one();
 
         if (Objects.isNull(user)) {
-
+            return JSONResult.fail("用户登录失败");
         }
 
-        if (S.eq(user.getUserPassword(), passwd)) {
-            StpUtil.setLoginId(user.getLoginName());
+        if (S.neq(user.getUserPassword(), loginEntity.getPasswd())) {
+            return JSONResult.fail("用户名或密码不正确");
         }
+        StpUtil.setLoginId(user.getLoginName());
         return JSONResult.success(StpUtil.getTokenInfo());
     }
 

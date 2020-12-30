@@ -2,7 +2,7 @@ package com.oskworks.framework.common.bean;
 
 public enum ErrorEnum {
     SUCCESS(1, "success", "成功"),
-    FAIL(2, "fail"),
+    FAIL(0, "fail"),
     NOT_LOGIN(401, "NotLoginException", "用户未登录"),
     NO_HANDLER_FOUND(404, "NoHandlerFoundException", "404");
 
