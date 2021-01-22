@@ -1,6 +1,6 @@
 package com.oskworks.modules.system.service;
 
-import com.oskworks.modules.system.entity.User;
+import com.oskworks.modules.system.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

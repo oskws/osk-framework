@@ -1,6 +1,6 @@
 package com.oskworks.modules.system.service.impl;
 
-import com.oskworks.modules.system.entity.User;
+import com.oskworks.modules.system.domain.User;
 import com.oskworks.modules.system.mapper.UserMapper;
 import com.oskworks.modules.system.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

@@ -76,6 +76,11 @@
             <artifactId>osgl-tool</artifactId>
             <version>${osgl-tool.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>5.5.7</version>
+        </dependency>
 
         <!--开发辅助依赖-->
         <dependency>

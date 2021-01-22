@@ -16,7 +16,6 @@ public class ErrorHandler {
     @ExceptionHandler({Exception.class})
     public JSONResult<?> handleShiroException(Exception ex) {
 
-        log.error(ex.getMessage(), ex);
         // 404
         if (ex instanceof NoHandlerFoundException) {
             return JSONResult.fail(ErrorEnum.NO_HANDLER_FOUND);
@@ -26,6 +25,8 @@ public class ErrorHandler {
         if (ex instanceof NotLoginException) {
             return JSONResult.fail(ErrorEnum.NOT_LOGIN);
         }
+
+        log.error(ex.getMessage(), ex);
 
         return JSONResult.fail(ex.getMessage());
     }

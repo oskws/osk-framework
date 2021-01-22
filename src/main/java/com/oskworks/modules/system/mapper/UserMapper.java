@@ -1,8 +1,7 @@
 package com.oskworks.modules.system.mapper;
 
-import com.oskworks.modules.system.entity.User;
+import com.oskworks.modules.system.domain.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 /**
