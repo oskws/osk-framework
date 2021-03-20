@@ -40,10 +40,14 @@ public class User implements Serializable {
     private Details details;
 
     @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdTime;
 
     @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedTime;
+
+    private Long detectId;
+
+    private String regionId;
 
     @Data
     private static class Details {

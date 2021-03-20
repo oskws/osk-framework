@@ -30,4 +30,21 @@ public class UserEndpoint {
         return JSONResult.success(user);
     }
 
+    /**
+     * 设置用户所在地区
+     */
+
+    /**
+     * 用户列表
+     */
+
+    /**
+     * 添加用户
+     */
+
+    /**
+     * 删除用户
+     */
+
+
 }
