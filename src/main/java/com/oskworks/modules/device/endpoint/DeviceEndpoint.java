@@ -18,7 +18,7 @@ import java.util.List;
  * @since 2021-01-20
  */
 @RestController
-@RequestMapping("/detectunit")
+@RequestMapping("/device")
 @AllArgsConstructor
 public class DeviceEndpoint {
 

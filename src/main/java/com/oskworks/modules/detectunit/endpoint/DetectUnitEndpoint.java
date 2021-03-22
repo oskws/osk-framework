@@ -28,7 +28,7 @@ public class DetectUnitEndpoint {
      * 根据地区获取检测单位列表
      */
     @GetMapping("/list/{regionId}")
-    public JSONResult<?> list(@RequestParam("regionId") String regionId) {
+    public JSONResult<?> list(@PathVariable("regionId") String regionId) {
         List<DetectUnit> units = detectUnitService.lambdaQuery().eq(DetectUnit::getRegionId, regionId).list();
         return JSONResult.success(units);
     }

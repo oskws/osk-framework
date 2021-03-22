@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2020-08-27
  */
 @Service
-public class DetectUnitServiceImpl extends ServiceImpl<DeviceMapper, Device> implements IDeviceService {
+public class DeviceServiceImpl extends ServiceImpl<DeviceMapper, Device> implements IDeviceService {
 
 }

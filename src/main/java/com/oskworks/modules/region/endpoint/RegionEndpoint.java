@@ -1,24 +1,22 @@
 package com.oskworks.modules.region.endpoint;
 
 
-import cn.dev33.satoken.stp.StpUtil;
 import com.oskworks.framework.common.bean.JSONResult;
-import com.oskworks.framework.configure.ApplicationConfiguration;
 import com.oskworks.modules.region.domain.Region;
+import com.oskworks.modules.region.dto.RegionNodeResult;
 import com.oskworks.modules.region.service.IRegionService;
-import com.oskworks.modules.system.domain.User;
-import com.oskworks.modules.system.entity.LoginEntity;
-import com.oskworks.modules.system.service.IUserService;
 import lombok.AllArgsConstructor;
-import org.osgl.util.S;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author fullee
@@ -32,13 +30,14 @@ public class RegionEndpoint {
     private final IRegionService regionService;
 
     /**
-     *  获取子地区列表
+     * 获取子地区列表
      */
-    @PutMapping("/child/{id}")
+    @GetMapping("/child/{id}")
     public JSONResult<?> login(@PathVariable String id) {
 
         List<Region> regions = regionService.lambdaQuery().eq(Region::getParentId, id).list();
-        return JSONResult.success(regions);
+        List<RegionNodeResult> result = regions.stream().map(RegionNodeResult::new).collect(Collectors.toList());
+        return JSONResult.success(result);
     }
 
 
