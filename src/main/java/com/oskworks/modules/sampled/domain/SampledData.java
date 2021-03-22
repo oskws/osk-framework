@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName(value = "lm_device", autoResultMap = true)
+@TableName(value = "lm_sampled_data", autoResultMap = true)
 public class SampledData implements Serializable {
 
     @TableId

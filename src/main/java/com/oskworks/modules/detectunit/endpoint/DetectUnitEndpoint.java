@@ -4,10 +4,12 @@ package com.oskworks.modules.detectunit.endpoint;
 import com.oskworks.framework.common.bean.JSONResult;
 import com.oskworks.modules.detectunit.domain.DetectUnit;
 import com.oskworks.modules.detectunit.service.IDetectUnitService;
+import com.oskworks.modules.region.dto.RegionNodeResult;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -30,7 +32,8 @@ public class DetectUnitEndpoint {
     @GetMapping("/list/{regionId}")
     public JSONResult<?> list(@PathVariable("regionId") String regionId) {
         List<DetectUnit> units = detectUnitService.lambdaQuery().eq(DetectUnit::getRegionId, regionId).list();
-        return JSONResult.success(units);
+        List<RegionNodeResult> results = units.stream().map(RegionNodeResult::new).collect(Collectors.toList());
+        return JSONResult.success(results);
     }
 
     @PostMapping("/add")
