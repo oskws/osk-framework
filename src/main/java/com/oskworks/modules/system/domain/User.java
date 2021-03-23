@@ -45,9 +45,7 @@ public class User implements Serializable {
     @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     private LocalDateTime updatedTime;
 
-    private Long detectId;
-
-    private String regionId;
+    private String regionPath;
 
     @Data
     private static class Details {

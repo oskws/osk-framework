@@ -32,8 +32,8 @@ public class DetectUnitEndpoint {
     @GetMapping("/list/{regionId}")
     public JSONResult<?> list(@PathVariable("regionId") String regionId) {
         List<DetectUnit> units = detectUnitService.lambdaQuery().eq(DetectUnit::getRegionId, regionId).list();
-        List<RegionNodeResult> results = units.stream().map(RegionNodeResult::new).collect(Collectors.toList());
-        return JSONResult.success(results);
+        List<RegionNodeResult> result = units.stream().map(RegionNodeResult::new).collect(Collectors.toList());
+        return JSONResult.success(result);
     }
 
     @PostMapping("/add")
