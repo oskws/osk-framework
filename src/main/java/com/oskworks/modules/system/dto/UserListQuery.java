@@ -18,8 +18,8 @@ public class UserListQuery {
         public static final int CURRENT = 2;
     }
 
-    private Integer page;
+    private Integer page = 1;
 
-    private Integer size;
+    private Integer size = 20;
 
 }

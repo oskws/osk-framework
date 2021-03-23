@@ -1,17 +1,18 @@
 package com.oskworks.modules.system.endpoint;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.oskworks.framework.common.bean.JSONResult;
 import com.oskworks.modules.system.domain.User;
 import com.oskworks.modules.system.dto.UserListQuery;
 import com.oskworks.modules.system.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.osgl.util.N;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 /**
  * <p>
@@ -31,24 +32,21 @@ public class UserEndpoint {
     /**
      * 显示用户列表
      */
-    @GetMapping
+    @PostMapping("/list")
     public JSONResult<?> list(@RequestBody UserListQuery query) {
 
-
+        LambdaQueryWrapper<User> wrapper = Wrappers.lambdaQuery(User.class);
         if (N.eq(query.getType(), UserListQuery.Type.ALL)) {
-            Wrappers.lambdaQuery(User.class).likeRight(User::getRegionPath, query.getRegionPath());
+            wrapper = wrapper.likeRight(User::getRegionPath, query.getRegionPath());
         } else {
-
+            wrapper = Wrappers.lambdaQuery(User.class)
+                    .eq(User::getRegionPath, query.getRegionPath());
         }
+        wrapper = wrapper.likeRight(Objects.nonNull(query.getNickname()),User::getNickname, query.getNickname());
 
+        Page<User> page = userService.page(new Page<>(query.getPage(), query.getSize()), wrapper);
 
-//        if (S.isEmpty(query.getRegionPath())) {
-//            return JSONResult.success();
-//        }
-
-        userService.lambdaQuery();
-
-        return null;
+        return JSONResult.success(page);
     }
 
     /**

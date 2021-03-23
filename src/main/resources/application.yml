@@ -8,7 +8,6 @@ server:
   port: 8080
 
 
-
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,3 +21,6 @@ spring:
   sa-token:
     token-name: Authentication
     is-read-cookie: false
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
