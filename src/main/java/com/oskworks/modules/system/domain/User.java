@@ -48,7 +48,7 @@ public class User implements Serializable {
     private String regionPath;
 
     @Data
-    private static class Details {
+    public static class Details {
         String sex;
         Integer age;
     }

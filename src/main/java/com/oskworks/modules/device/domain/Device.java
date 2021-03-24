@@ -25,11 +25,16 @@ public class Device implements Serializable {
 
     private String detectUnitId;
 
+    private String detectUnitName;
+
     private String regionPath;
 
     private String deviceType;
 
     private String deviceOnlineState;
+
+    @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
+    private LocalDateTime changeStateTime;
 
     @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     private LocalDateTime createdTime;

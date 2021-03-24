@@ -62,7 +62,7 @@ public class SystemEndpoint {
         if (S.neq(user.getUserPassword(), loginEntity.getPasswd())) {
             return JSONResult.fail("用户名或密码不正确");
         }
-        StpUtil.setLoginId(user.getLoginName());
+        StpUtil.setLoginId(user.getId());
         return JSONResult.success(StpUtil.getTokenInfo());
     }
 
