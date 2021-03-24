@@ -21,13 +21,15 @@ public class Device implements Serializable {
     @TableId
     private Long id;
 
-    private String regionId;
+    private String deviceNo;
 
-    private String unitName;
+    private String detectUnitId;
 
-    private String principalName;
+    private String regionPath;
 
-    private String principalMobileNo;
+    private String deviceType;
+
+    private String deviceOnlineState;
 
     @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     private LocalDateTime createdTime;
