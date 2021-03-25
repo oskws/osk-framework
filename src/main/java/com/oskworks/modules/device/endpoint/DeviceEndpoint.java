@@ -24,24 +24,32 @@ public class DeviceEndpoint {
 
     private final IDeviceService deviceService;
 
-    /**
-     * 根据地区获取检测单位列表
-     */
     @PostMapping("/list")
     public JSONResult<?> list(@RequestBody DeviceListQuery query) {
-        Page<Device> result = deviceService.lambdaQuery().likeRight(Device::getRegionPath, query.getRegionPath()).page(new Page<>(query.getPage(), query.getSize()));
+
+
+        Page<Device> result = deviceService.lambdaQuery()
+                .likeRight(Device::getRegionPath, query.getRegionPath())
+                .page(new Page<>(query.getPage(), query.getSize()));
         return JSONResult.success(result);
     }
 
-    @PostMapping("/add")
-    public JSONResult<?> add(@RequestBody Device detectUnit) {
-        deviceService.save(detectUnit);
+    @PutMapping("/{id}")
+    public JSONResult<?> modify(@PathVariable Long id, @RequestBody Device device) {
+        device.setId(id);
+        deviceService.updateById(device);
         return JSONResult.success();
     }
 
-    @PostMapping("/remove/{id}")
-    public JSONResult<?> remove(@PathVariable Long detectUnit) {
-        deviceService.removeById(detectUnit);
+    @PostMapping
+    public JSONResult<?> add(@RequestBody Device device) {
+        deviceService.save(device);
+        return JSONResult.success();
+    }
+
+    @DeleteMapping("/{id}")
+    public JSONResult<?> remove(@PathVariable Long id) {
+        deviceService.removeById(id);
         return JSONResult.success();
     }
 

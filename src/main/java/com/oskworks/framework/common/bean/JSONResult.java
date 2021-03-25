@@ -13,7 +13,7 @@ public class JSONResult<T> implements Serializable {
     private String msg = "success";
 
     // 用户友好提示
-    private String view = "成功";
+    private String view = "操作成功";
 
     private T payload;
 

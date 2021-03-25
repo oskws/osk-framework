@@ -36,15 +36,27 @@ public class DetectUnitEndpoint {
         return JSONResult.success(result);
     }
 
-    @PostMapping("/add")
+    @GetMapping("/{id}")
+    public JSONResult<?> one(@PathVariable("id") Long id) {
+        return JSONResult.success(detectUnitService.getById(id));
+    }
+
+    @PostMapping
     public JSONResult<?> add(@RequestBody DetectUnit detectUnit) {
         detectUnitService.save(detectUnit);
+        return JSONResult.success(new RegionNodeResult(detectUnit));
+    }
+
+    @PutMapping("/{id}")
+    public JSONResult<?> modify(@PathVariable Long id, @RequestBody DetectUnit detectUnit) {
+        detectUnit.setId(id);
+        detectUnitService.updateById(detectUnit);
         return JSONResult.success();
     }
 
-    @PostMapping("/remove/{id}")
-    public JSONResult<?> remove(@PathVariable Long detectUnit) {
-        detectUnitService.removeById(detectUnit);
+    @DeleteMapping("/{id}")
+    public JSONResult<?> remove(@PathVariable Long id) {
+        detectUnitService.removeById(id);
         return JSONResult.success();
     }
 

@@ -5,13 +5,13 @@ application:
     - /login
     - /join
 server:
-  port: 8080
+  port: 8089
 
 
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${dbip}:3306/oskdb?useUnicode=true&useSSL=true&autoReconnect=true
+    url: jdbc:mysql://${dbip}:3309/oskdb?useUnicode=true&useSSL=true&autoReconnect=true
     username: root
     password: ${dbpasswd}
   mvc:
@@ -21,6 +21,7 @@ spring:
   sa-token:
     token-name: Authentication
     is-read-cookie: false
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
