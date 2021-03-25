@@ -8,6 +8,7 @@ import com.oskworks.modules.region.dto.RegionNodeResult;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,6 +44,7 @@ public class DetectUnitEndpoint {
 
     @PostMapping
     public JSONResult<?> add(@RequestBody DetectUnit detectUnit) {
+        detectUnit.setCreatedTime(LocalDateTime.now());
         detectUnitService.save(detectUnit);
         return JSONResult.success(new RegionNodeResult(detectUnit));
     }
@@ -51,7 +53,7 @@ public class DetectUnitEndpoint {
     public JSONResult<?> modify(@PathVariable Long id, @RequestBody DetectUnit detectUnit) {
         detectUnit.setId(id);
         detectUnitService.updateById(detectUnit);
-        return JSONResult.success();
+        return JSONResult.success(new RegionNodeResult(detectUnitService.getById(id)));
     }
 
     @DeleteMapping("/{id}")

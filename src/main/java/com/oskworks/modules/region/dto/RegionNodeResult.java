@@ -23,6 +23,10 @@ public class RegionNodeResult {
     /* 区域层级：1省，2市，3区，4检测站 */
     private int level;
 
+    private String principalName;
+
+    private String principalMobileNo;
+
     public static class Level {
         public static final int PROVINCE = 1;
         public static final int CITY = 2;
@@ -56,6 +60,8 @@ public class RegionNodeResult {
             this.name = detectUnit.getUnitName();
             this.parentId = detectUnit.getRegionId();
             this.level = Level.DETECT_UNIT;
+            this.principalName = detectUnit.getPrincipalName();
+            this.principalMobileNo = detectUnit.getPrincipalMobileNo();
             this.createdAt = detectUnit.getCreatedTime();
         }
     }
