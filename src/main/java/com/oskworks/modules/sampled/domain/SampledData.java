@@ -36,7 +36,12 @@ public class SampledData implements Serializable {
 
     private String detectValue;
 
-    private String detectResult;
+    private Integer detectResult;
+
+    public static class DetectResult {
+        public static final int ALLOW = 1;
+        public static final int REFUSE = 2;
+    }
 
     @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     private LocalDateTime detectTime;

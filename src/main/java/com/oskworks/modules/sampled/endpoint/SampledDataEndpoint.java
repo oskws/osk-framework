@@ -9,14 +9,17 @@ import com.oskworks.modules.device.domain.Device;
 import com.oskworks.modules.device.service.IDeviceService;
 import com.oskworks.modules.region.dto.RegionType;
 import com.oskworks.modules.sampled.domain.SampledData;
+import com.oskworks.modules.sampled.dto.SampledDataListQuery;
 import com.oskworks.modules.sampled.service.ISampledDataService;
 import com.oskworks.modules.system.dto.RegionUserDTO;
 import com.oskworks.modules.system.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.osgl.util.N;
+import org.osgl.util.S;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -42,8 +45,8 @@ public class SampledDataEndpoint {
     /**
      * 展示用户可视区域的采样数据
      */
-    @GetMapping("/list")
-    public JSONResult<?> list(@RequestParam(value = "page",defaultValue = "1") int page, @RequestParam(value = "size",defaultValue = "20") int size) {
+    @PostMapping("/list")
+    public JSONResult<?> list(@RequestBody SampledDataListQuery query) {
 
         RegionUserDTO regionUser = userService.getLoginRegionUser();
 
@@ -59,28 +62,39 @@ public class SampledDataEndpoint {
             return JSONResult.fail("暂无数据");
         }
 
-
         Page<SampledData> sampledData = sampledDataService.lambdaQuery()
                 .in(SampledData::getDeviceNo, devices.stream().map(Device::getDeviceNo).collect(Collectors.toList()))
-                .page(new Page<>(page, size));
+                .likeRight(S.notBlank(query.getDetectItem()), SampledData::getDetectItem, query.getDetectItem())
+                .likeRight(S.notBlank(query.getSampledName()), SampledData::getSampledName, query.getSampledName())
+                .likeRight(S.notBlank(query.getDetectUnitName()),SampledData::getDetectUnitName,query.getDetectUnitName())
+                .eq(Objects.nonNull(query.getDetectResult()), SampledData::getDetectResult,query.getDetectResult())
+                .between(Objects.nonNull(query.getDetectTimeStart()) && Objects.nonNull(query.getDetectTimeEnd()), SampledData::getDetectTime,query.getDetectTimeStart(),query.getDetectTimeEnd())
+                .page(new Page<>(query.getCurrent(), query.getPageSize()));
 
         return JSONResult.success(sampledData);
     }
 
-    /**
-     * 设备上传数据
-     */
-    @PostMapping("/add")
+    @PutMapping("/add")
     public JSONResult<?> add(@RequestBody SampledData data) {
         sampledDataService.save(data);
         return JSONResult.success();
     }
 
-    @PostMapping("/remove/{id}")
-    public JSONResult<?> remove(@PathVariable Long detectUnit) {
-        sampledDataService.removeById(detectUnit);
+    /**
+     * 修改设备上传结果
+     */
+    @PutMapping("/{id}")
+    public JSONResult<?> modify(@PathVariable Long id, @RequestBody SampledData data) {
+
+        sampledDataService.lambdaUpdate().eq(SampledData::getId, id)
+                .set(Objects.nonNull(data.getDetectResult()), SampledData::getDetectResult, data.getDetectResult())
+                .set(Objects.nonNull(data.getDetectValue()), SampledData::getDetectValue, data.getDetectValue())
+                .update();
+
         return JSONResult.success();
     }
+
+
 
 
 }
