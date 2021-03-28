@@ -1,6 +1,7 @@
 package com.oskworks.modules.device.domain;
 
 import cn.hutool.core.date.DatePattern;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 @TableName(value = "lm_device", autoResultMap = true)
 public class Device implements Serializable {
 
-    @TableId
+    @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 
     private String deviceNo;

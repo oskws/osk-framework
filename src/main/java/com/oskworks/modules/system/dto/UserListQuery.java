@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class UserListQuery {
 
+    private String loginName;
+
     private String nickname;
 
     /* 地区ID */
@@ -18,8 +20,8 @@ public class UserListQuery {
         public static final int CURRENT = 2;
     }
 
-    private Integer page = 1;
+    private Integer current = 1;
 
-    private Integer size = 20;
+    private Integer pageSize = 20;
 
 }

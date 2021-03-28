@@ -42,28 +42,42 @@ public class UserEndpoint {
             wrapper = Wrappers.lambdaQuery(User.class)
                     .eq(User::getRegionPath, query.getRegionPath());
         }
-        wrapper = wrapper.likeRight(Objects.nonNull(query.getNickname()),User::getNickname, query.getNickname());
+        wrapper = wrapper.likeRight(Objects.nonNull(query.getNickname()), User::getNickname, query.getNickname())
+        .likeRight(Objects.nonNull(query.getLoginName()),User::getLoginName,query.getLoginName());
 
-        Page<User> page = userService.page(new Page<>(query.getPage(), query.getSize()), wrapper);
+        Page<User> page = userService.page(new Page<>(query.getCurrent(), query.getPageSize()), wrapper);
 
         return JSONResult.success(page);
     }
 
     /**
-     * 设置用户所在地区
-     */
-
-    /**
-     * 用户列表
-     */
-
-    /**
      * 添加用户
      */
+    @PostMapping
+    public JSONResult<?> add(@RequestBody User user) {
+        if (Objects.nonNull(userService.lambdaQuery().eq(User::getLoginName, user.getLoginName()).one())) {
+            return JSONResult.fail("用户账号已存在");
+        }
+        userService.save(user);
+        return JSONResult.success();
+    }
 
     /**
-     * 删除用户
+     * 重置密码
      */
+    @PutMapping("/reset/passwd/{id}")
+    public JSONResult<?> resetPasswd(@PathVariable Long id) {
+        userService.lambdaUpdate().eq(User::getId, id).set(User::getUserPassword, "123456").update();
+        return JSONResult.success();
+    }
 
-
+    /**
+     * 编辑用户
+     */
+    @PutMapping("/{id}")
+    public JSONResult<?> editUser(@PathVariable Long id, @RequestBody User user) {
+        user.setId(id);
+        userService.updateById(user);
+        return JSONResult.success();
+    }
 }
