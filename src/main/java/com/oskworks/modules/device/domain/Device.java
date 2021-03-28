@@ -32,7 +32,7 @@ public class Device implements Serializable {
 
     private String deviceType;
 
-    private String deviceOnlineState;
+    private Integer deviceOnlineState;
 
     @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     private LocalDateTime changeStateTime;

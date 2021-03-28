@@ -9,6 +9,8 @@ import com.oskworks.modules.device.service.IDeviceService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 /**
  * <p>
  * 检测单位
@@ -27,10 +29,12 @@ public class DeviceEndpoint {
     @PostMapping("/list")
     public JSONResult<?> list(@RequestBody DeviceListQuery query) {
 
-
         Page<Device> result = deviceService.lambdaQuery()
                 .likeRight(Device::getRegionPath, query.getRegionPath())
-                .page(new Page<>(query.getPage(), query.getSize()));
+                .likeRight(Objects.nonNull(query.getDeviceNo()), Device::getDeviceNo, query.getDeviceNo())
+                .likeRight(Objects.nonNull(query.getDeviceType()), Device::getDeviceType, query.getDeviceType())
+                .eq(Objects.nonNull(query.getDeviceOnlineState()), Device::getDeviceOnlineState, query.getDeviceOnlineState())
+                .page(new Page<>(query.getCurrent(), query.getPageSize()));
         return JSONResult.success(result);
     }
 

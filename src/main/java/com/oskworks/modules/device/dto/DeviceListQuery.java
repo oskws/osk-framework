@@ -5,13 +5,18 @@ import lombok.Data;
 @Data
 public class DeviceListQuery {
 
+    private Integer deviceOnlineState;
+
+    private String deviceType;
+
     private String deviceNo;
 
     /* 地区路径 */
     private String regionPath;
 
-    private Integer page = 1;
 
-    private Integer size = 20;
+    private Integer current = 1;
+
+    private Integer pageSize = 20;
 
 }
