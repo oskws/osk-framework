@@ -13,4 +13,6 @@ import com.oskworks.modules.device.domain.Device;
  */
 public interface IDeviceService extends IService<Device> {
 
+    Device getByDeviceNo(String deviceNo);
+
 }

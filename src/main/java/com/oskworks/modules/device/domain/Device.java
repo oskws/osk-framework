@@ -24,7 +24,7 @@ public class Device implements Serializable {
 
     private String deviceNo;
 
-    private String detectUnitId;
+    private Long detectUnitId;
 
     private String detectUnitName;
 
@@ -33,6 +33,11 @@ public class Device implements Serializable {
     private String deviceType;
 
     private Integer deviceOnlineState;
+
+    public static class DeviceOnlineState {
+        public static final int ONLINE = 1;
+        public static final int OFFLINE = 0;
+    }
 
     @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     private LocalDateTime changeStateTime;

@@ -2,6 +2,8 @@ application:
   version: 1.0
   exclude-urls:
     - /version
+    - /device/keepalive
+    - /device/sampled
     - /login
     - /join
 server:
@@ -11,7 +13,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${dbip}:3306/oskdb?useUnicode=true&useSSL=true&autoReconnect=true
+    url: jdbc:mysql://${dbip}:3309/oskdb?useUnicode=true&useSSL=true&autoReconnect=true
     username: root
     password: ${dbpasswd}
   mvc:

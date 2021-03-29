@@ -4,7 +4,16 @@ public enum ErrorEnum {
     SUCCESS(1, "success", "成功"),
     FAIL(0, "fail"),
     NOT_LOGIN(401, "NotLoginException", "用户未登录"),
-    NO_HANDLER_FOUND(404, "NoHandlerFoundException", "404");
+    NO_HANDLER_FOUND(404, "NoHandlerFoundException", "404"),
+
+    /**
+     * 业务错误编码 规则
+     * 业务类提示信息 1 开头
+     * 设备类提示 10 开头
+     */
+    DEVICE_NOT_EXISTS(1001, "device not exists", "设备未注册"),
+
+    ;
 
 
 

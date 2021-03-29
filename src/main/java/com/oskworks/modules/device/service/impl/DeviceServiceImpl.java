@@ -17,4 +17,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class DeviceServiceImpl extends ServiceImpl<DeviceMapper, Device> implements IDeviceService {
 
+    @Override
+    public Device getByDeviceNo(String deviceNo) {
+        return lambdaQuery().eq(Device::getDeviceNo, deviceNo).one();
+    }
 }

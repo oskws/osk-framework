@@ -74,12 +74,6 @@ public class SampledDataEndpoint {
         return JSONResult.success(sampledData);
     }
 
-    @PutMapping("/add")
-    public JSONResult<?> add(@RequestBody SampledData data) {
-        sampledDataService.save(data);
-        return JSONResult.success();
-    }
-
     /**
      * 修改设备上传结果
      */
@@ -93,8 +87,4 @@ public class SampledDataEndpoint {
 
         return JSONResult.success();
     }
-
-
-
-
 }
