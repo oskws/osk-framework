@@ -12,29 +12,25 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
--- 导出 oskdb 的数据库结构
-CREATE DATABASE IF NOT EXISTS `oskdb` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `oskdb`;
-
 -- 导出  表 oskdb.lm_detect_unit 结构
 CREATE TABLE IF NOT EXISTS `lm_detect_unit` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `region_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '所属地区ID',
-  `unit_name` varchar(50) DEFAULT NULL COMMENT '检测单位名称',
+  `unit_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '检测单位名称',
   `principal_name` varchar(50) DEFAULT NULL COMMENT '负责人姓名',
   `principal_mobile_no` char(11) DEFAULT NULL COMMENT '负责人联系电话',
-  `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=900009 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  oskdb.lm_detect_unit 的数据：~2 rows (大约)
+-- 正在导出表  oskdb.lm_detect_unit 的数据：~4 rows (大约)
 DELETE FROM `lm_detect_unit`;
 /*!40000 ALTER TABLE `lm_detect_unit` DISABLE KEYS */;
 INSERT INTO `lm_detect_unit` (`id`, `region_id`, `unit_name`, `principal_name`, `principal_mobile_no`, `created_time`) VALUES
-	(1, '110101', '蓝色智谷检测点', '德达', NULL, '2021-03-25 16:13:39'),
-	(2, '110101', '蓝色智谷检测点2', '德达', NULL, '2021-03-25 16:13:40'),
-	(9, '110101', '2', '2', '2', '2021-03-25 08:02:06');
+	(1, '110101', '蓝色智谷检测点12333', '德达', '11564567655', '2021-03-25 16:13:39'),
+	(2, '110101', '蓝色智谷检测点21', '德达', NULL, '2021-03-25 16:13:40'),
+	(900005, '110101', '444533322d', '445', '15624339848', NULL),
+	(900008, '110102', 'sf1', '1sf', '14565554454', '2021-03-25 22:24:35');
 /*!40000 ALTER TABLE `lm_detect_unit` ENABLE KEYS */;
 
 -- 导出  表 oskdb.lm_device 结构
@@ -48,14 +44,18 @@ CREATE TABLE IF NOT EXISTS `lm_device` (
   `device_online_state` int NOT NULL DEFAULT '0' COMMENT '设备在线状态(1在线，0离线)',
   `change_state_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '状态变更时间',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `device_no` (`device_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  oskdb.lm_device 的数据：~1 rows (大约)
+-- 正在导出表  oskdb.lm_device 的数据：~4 rows (大约)
 DELETE FROM `lm_device`;
 /*!40000 ALTER TABLE `lm_device` DISABLE KEYS */;
 INSERT INTO `lm_device` (`id`, `device_no`, `detect_unit_id`, `detect_unit_name`, `region_path`, `device_type`, `device_online_state`, `change_state_time`, `created_time`) VALUES
-	(1, '111', 10, '真烟-假烟', '11-1101-110101-1', '真假烟检测设备', 1, '2021-03-24 03:15:46', '2021-03-24 02:41:41');
+	(1, '111', 10, '真烟-假烟', '11-1101-110101-1', '真假烟检测设备', 0, '2021-03-29 07:38:23', '2021-03-23 18:41:41'),
+	(2, '1', 1, '蓝色智谷检测点12333', '11-1101-110101-1', '12', 0, '2021-03-28 18:12:31', '2021-03-28 18:12:31'),
+	(3, '3', 1, '蓝色智谷检测点12333', '11-1101-110101-1', '23333', 0, '2021-03-28 18:13:44', '2021-03-28 18:13:44'),
+	(4, '2', 2, '蓝色智谷检测点21', '11-1101-110101-2', '2', 0, '2021-03-28 18:36:18', '2021-03-28 18:36:18');
 /*!40000 ALTER TABLE `lm_device` ENABLE KEYS */;
 
 -- 导出  表 oskdb.lm_sampled_data 结构
@@ -68,17 +68,27 @@ CREATE TABLE IF NOT EXISTS `lm_sampled_data` (
   `device_no` varchar(32) DEFAULT NULL COMMENT '检测设备编号',
   `detect_item` varchar(50) DEFAULT NULL COMMENT '检测项目',
   `detect_value` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '检测值',
-  `detect_result` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '检测结果',
+  `detect_result` tinyint unsigned NOT NULL COMMENT '检测结果{1:合格,0:不合格}',
   `detect_time` datetime DEFAULT NULL COMMENT '检测时间',
   `created_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  oskdb.lm_sampled_data 的数据：~1 rows (大约)
+-- 正在导出表  oskdb.lm_sampled_data 的数据：~0 rows (大约)
 DELETE FROM `lm_sampled_data`;
 /*!40000 ALTER TABLE `lm_sampled_data` DISABLE KEYS */;
 INSERT INTO `lm_sampled_data` (`id`, `sampled_name`, `sampled_no`, `detect_unit_id`, `detect_unit_name`, `device_no`, `detect_item`, `detect_value`, `detect_result`, `detect_time`, `created_time`) VALUES
-	(1, '中华烟（r软）', '1111', 1, '山东烟草', '111', '真假烟检测', '98', '真烟', '2021-03-24 16:00:53', '2021-03-24 16:00:54');
+	(1, '中华烟（r软）', '1111', 1, '山东烟草', '111', '真假烟检测', '9811', 1, '2021-03-24 16:00:53', '2021-03-24 16:00:54'),
+	(2, 'qc', '111', 10, '真烟-假烟', '111', 'lin', '1112', 0, '2020-03-29 05:56:21', '2021-03-29 06:05:43'),
+	(3, 'qc', '111', 10, '真烟-假烟', '111', 'lin', '111', 0, '2020-03-29 05:56:21', '2021-03-29 06:27:35'),
+	(4, 'qc', '111', 10, '真烟-假烟', '111', 'lin', '111', 0, '2020-03-29 05:56:21', '2021-03-29 06:27:48'),
+	(5, 'qc', '111', 10, '真烟-假烟', '111', 'lin', '111', 0, '2020-03-29 05:56:21', '2021-03-29 06:27:49'),
+	(6, 'qc', '111', 10, '真烟-假烟', '111', 'lin', '111', 0, '2020-03-29 05:56:21', '2021-03-29 06:27:50'),
+	(7, 'qc', '111', 10, '真烟-假烟', '111', 'lin', '111', 0, '2020-03-29 05:56:21', '2021-03-29 06:27:51'),
+	(8, 'qc', '111', 10, '真烟-假烟', '111', 'lin', '111', 0, '2020-03-29 05:56:21', '2021-03-29 06:27:52'),
+	(9, 'qc', '111', 10, '真烟-假烟', '111', 'lin', '111', 0, '2020-03-29 05:56:21', '2021-03-29 06:27:53'),
+	(10, 'qc', '111', 10, '真烟-假烟', '111', 'lin', '111', 0, '2020-03-29 05:56:21', '2021-03-29 06:27:54'),
+	(11, 'qc', '111', 10, '真烟-假烟', '111', 'lin', '111', 0, '2020-03-29 05:56:21', '2021-03-29 06:27:55');
 /*!40000 ALTER TABLE `lm_sampled_data` ENABLE KEYS */;
 
 -- 导出  表 oskdb.osk_region 结构
@@ -93,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `osk_region` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  oskdb.osk_region 的数据：~3,450 rows (大约)
+-- 正在导出表  oskdb.osk_region 的数据：~3,413 rows (大约)
 DELETE FROM `osk_region`;
 /*!40000 ALTER TABLE `osk_region` DISABLE KEYS */;
 INSERT INTO `osk_region` (`id`, `name`, `parent_id`, `lng`, `lat`, `created_at`, `updated_at`) VALUES
@@ -3556,19 +3566,20 @@ CREATE TABLE IF NOT EXISTS `osk_user` (
   `nickname` varchar(50) DEFAULT NULL COMMENT '昵称',
   `password_slat` varchar(50) DEFAULT NULL COMMENT '盐',
   `user_password` varchar(50) DEFAULT NULL COMMENT '用户密码',
+  `details` varchar(50) DEFAULT NULL,
+  `region_path` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '所属地区',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
   `updated_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
-  `details` varchar(50) DEFAULT NULL,
-  `region_path` varchar(120) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户账号信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户账号信息表';
 
--- 正在导出表  oskdb.osk_user 的数据：~2 rows (大约)
+-- 正在导出表  oskdb.osk_user 的数据：~3 rows (大约)
 DELETE FROM `osk_user`;
 /*!40000 ALTER TABLE `osk_user` DISABLE KEYS */;
-INSERT INTO `osk_user` (`id`, `login_name`, `nickname`, `password_slat`, `user_password`, `created_time`, `updated_time`, `details`, `region_path`) VALUES
-	(1, '1', '茶几102', NULL, '1', '2020-12-30 20:40:36', NULL, NULL, '11-1101-110101'),
-	(2, '2', '茶几10', NULL, '1', '2020-12-30 20:40:36', NULL, NULL, '11-1101-110101-1');
+INSERT INTO `osk_user` (`id`, `login_name`, `nickname`, `password_slat`, `user_password`, `details`, `region_path`, `created_time`, `updated_time`) VALUES
+	(1, '1', '茶几102', NULL, '1', NULL, '11-1101-110101', '2020-12-30 20:40:36', NULL),
+	(2, '2', '茶几101', NULL, '123456', NULL, '11-1101-110101-1', '2020-12-30 20:40:36', NULL),
+	(100, '23', '224444', NULL, '123456', NULL, '11-1101', '2021-03-28 09:41:26', NULL);
 /*!40000 ALTER TABLE `osk_user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
