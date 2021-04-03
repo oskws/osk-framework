@@ -3,9 +3,11 @@ package com.oskworks.modules.device.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.oskworks.modules.device.domain.Device;
 
+import java.util.List;
+
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author osk-generator
@@ -15,4 +17,5 @@ public interface IDeviceService extends IService<Device> {
 
     Device getByDeviceNo(String deviceNo);
 
+    List<Device> getDeviceListByCurrentUser();
 }
