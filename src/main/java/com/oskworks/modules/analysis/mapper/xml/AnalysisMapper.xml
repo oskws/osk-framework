@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oskworks.modules.analysis.mapper.AnalysisMapper">
+
+    <select id="detectUnitSampledSizeRank" resultType="com.oskworks.modules.analysis.dto.DetectUnitRank">
+        SELECT `id`,COUNT(1) AS `count`,`detect_unit_name`
+        FROM lm_sampled_data
+        WHERE `device_no` IN
+        <foreach collection="deviceNos" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        AND `created_time` BETWEEN #{startTime} AND #{endTime}
+        GROUP BY `detect_unit_id`
+        ORDER BY `count` DESC
+    </select>
+
+    <select id="detectUnitAllowSampledSizeRank" resultType="com.oskworks.modules.analysis.dto.DetectUnitRank">
+        SELECT `id`,COUNT(1) AS `count`,`detect_unit_name`
+        FROM lm_sampled_data
+        WHERE `device_no` IN
+        <foreach collection="deviceNos" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        AND `created_time` BETWEEN #{startTime} AND #{endTime}
+        AND `detect_result`=1
+        GROUP BY `detect_unit_id`
+        ORDER BY `count` DESC
+    </select>
+</mapper>
