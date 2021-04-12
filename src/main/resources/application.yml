@@ -13,7 +13,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${dbip}:3309/oskdb?useUnicode=true&useSSL=true&autoReconnect=true
+    url: jdbc:mysql://${dbip}:3306/oskdb?useUnicode=true&useSSL=true&autoReconnect=true
     username: root
     password: ${dbpasswd}
   mvc:
@@ -27,3 +27,4 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapperLocations: classpath*:mapper/**/*.xml,classpath*:com/oskworks/modules/**/mapper/xml/*.xml

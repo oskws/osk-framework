@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.oskworks.framework.common.bean.JSONResult;
 import com.oskworks.modules.system.domain.User;
+import com.oskworks.modules.system.dto.RegionUserDTO;
 import com.oskworks.modules.system.dto.UserListQuery;
 import com.oskworks.modules.system.service.IUserService;
 import lombok.AllArgsConstructor;
@@ -79,5 +80,13 @@ public class UserEndpoint {
         user.setId(id);
         userService.updateById(user);
         return JSONResult.success();
+    }
+
+    /**
+     * 个人信息
+     */
+    @GetMapping
+    public JSONResult<RegionUserDTO> details() {
+        return JSONResult.success(userService.getLoginRegionUser());
     }
 }
