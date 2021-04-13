@@ -41,6 +41,14 @@ public class SampledDataEndpoint {
 
     private final ISampledDataService sampledDataService;
 
+    /**
+     * 扫码获取采样信息
+     */
+    @GetMapping("/scan")
+    public JSONResult<?> sampled(@RequestParam String id) {
+        return JSONResult.success(sampledDataService.getById(id));
+    }
+
 
     /**
      * 展示用户可视区域的采样数据
