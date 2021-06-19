@@ -1,6 +1,5 @@
 package com.oskworks.framework.configure;
 
-import cn.dev33.satoken.interceptor.SaCheckInterceptor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,33 +25,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 
         registry.addInterceptor(new SaLoginCheckInterceptor()).addPathPatterns("/**").excludePathPatterns(configuration.getExcludeUrls());
-
-//        registry.addInterceptor(new HandlerInterceptor() {
-//            @Override
-//            public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//                String jwt = request.getHeader("Authorization").replace("Bearer ", "");
-//
-//                try {
-//                    DecodedJWT decodedJWT = JWTKit.verifierJWT(jwt);
-//                    Claim claim = decodedJWT.getClaim(JWTKit.KEY.AUTHORIZATION.getValue());
-//                    String loginName = claim.asString();
-//
-////                    if (userService.checkedUser(loginName)) {
-////                        System.out.println("认证成功");
-////                        return true;
-////                    }
-//
-//                } catch (Exception e) {
-//                    log.info("Token认证失败");
-//                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                    return false;
-//                }
-//
-//
-//                return true;
-//            }
-//        }).addPathPatterns("/**").excludePathPatterns(excludeUrls);
     }
-
 }
 

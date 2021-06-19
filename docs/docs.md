@@ -14,6 +14,7 @@ https://www.cnblogs.com/shuchengyi/p/11139273.html
 springboot
 
 ## 环境变量
+#### IDEA 设置环境变量
+```shell
 DB_IP=192.168.1.194;DB_PASSWD=fc!@#;DB_PORT=3309;DB_NAME=oskdb
-
-
+```
